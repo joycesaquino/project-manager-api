@@ -2,14 +2,18 @@ import { ITask } from './task.interface';
 import { IUser } from './user.interface';
 
 /**
- * Represents a project with its associated properties and relationships.
+ * Represents a project in the system.
  *
- * @interface IProject
- * @property {number} id - The unique identifier of the project.
- * @property {string} name - The name of the project.
- * @property {string} description - A detailed description of the project.
- * @property {ITask[]} tasks - A collection of tasks associated with the project.
- * @property {IUser} user - The user associated with or responsible for the project.
+ * This interface defines the structure of a project object,
+ * encompassing its basic properties such as ID, name, and description,
+ * as well as its associated tasks and user.
+ *
+ * Properties:
+ * - id: A unique identifier for the project.
+ * - name: The name of the project.
+ * - description: A detailed explanation of the project's purpose or scope.
+ * - tasks: A list of tasks associated with the project.
+ * - user: The user or owner associated with the project.
  */
 export interface IProject {
   id: number;
