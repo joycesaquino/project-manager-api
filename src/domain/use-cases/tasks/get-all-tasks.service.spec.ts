@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { GetAllTasksByProjectIdService } from './get-all-tasks-by-project-id.service';
+import { GetAllTasksService } from './get-all-tasks.service';
 
 describe('GetAllTasksByProjectIdService', () => {
-  let service: GetAllTasksByProjectIdService;
+  let service: GetAllTasksService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [GetAllTasksByProjectIdService],
+      providers: [GetAllTasksService],
     }).compile();
 
-    service = module.get<GetAllTasksByProjectIdService>(GetAllTasksByProjectIdService);
+    service = module.get<GetAllTasksService>(GetAllTasksService);
   });
 
   it('should be defined', () => {
