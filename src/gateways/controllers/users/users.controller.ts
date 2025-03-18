@@ -20,7 +20,7 @@ export class UsersController {
   @Get(':id')
   async findOne(@Param('id') id: number) {
     try {
-      return await this.getUserUseCase.execute(+id);
+      return await this.getUserUseCase.execute(id);
     } catch (error) {
       throw new NotFoundException(error.message);
     }

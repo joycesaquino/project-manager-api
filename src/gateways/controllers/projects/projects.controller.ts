@@ -13,7 +13,6 @@ import { GetProjectByIdService } from 'src/domain/use-cases/projects/get-project
 import { CreateProjectDto } from './dtos/create-project.dto';
 
 const userId = 1;
-
 @Controller('projects')
 export class ProjectsController {
   constructor(
@@ -21,14 +20,17 @@ export class ProjectsController {
     private readonly getProjectByIdUseCase: GetProjectByIdService,
     private readonly createProjectUseCase: CreateProjectService,
   ) {}
+
   @Get()
   async findAll() {
     try {
       return await this.getAllProjectsUseCase.execute(userId);
     } catch (error) {
+      console.error(error);
       throw new NotFoundException(error.message);
     }
   }
+
   @Get(':id')
   async findOne(@Param('id') id: number) {
     try {
@@ -40,6 +42,7 @@ export class ProjectsController {
       throw new NotFoundException(error.message);
     }
   }
+
   @Post()
   async create(@Body() createProjectDto: CreateProjectDto) {
     try {

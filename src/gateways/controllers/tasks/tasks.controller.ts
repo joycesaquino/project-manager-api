@@ -13,7 +13,6 @@ import { GetTaskByIdService } from 'src/domain/use-cases/tasks/get-task-by-id.se
 import { CreateTaskDto } from './dtos/create-task.dto';
 
 const userId = 1;
-
 @Controller('tasks')
 export class TasksController {
   constructor(
@@ -21,6 +20,7 @@ export class TasksController {
     private readonly getTaskByIdUseCase: GetTaskByIdService,
     private readonly createTaskUseCase: CreateTaskService,
   ) {}
+
   @Get()
   async findAll() {
     try {
@@ -29,6 +29,7 @@ export class TasksController {
       throw new NotFoundException(error.message);
     }
   }
+
   @Get(':id')
   async findOne(@Param('id') id: number) {
     try {
@@ -40,6 +41,7 @@ export class TasksController {
       throw new NotFoundException(error.message);
     }
   }
+
   @Post()
   async create(@Body() createTaskDto: CreateTaskDto) {
     try {
