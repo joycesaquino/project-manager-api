@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProjectsRepositoryService } from '../../domain/repositories/projects.repository.service';
 import { TasksRepositoryService } from '../../domain/repositories/tasks.repository.service';
 import { UsersRepositoryService } from '../../domain/repositories/users.repository.service';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
