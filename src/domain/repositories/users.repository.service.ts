@@ -20,4 +20,8 @@ export class UsersRepositoryService
   findById(id: number): Promise<IUser> {
     return this.findOneByOrFail( {id} );
   }
+
+  findByEmail(email: string): Promise<IUser | null> {
+    return this.findOneBy( {email} );
+  }
 }
