@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, DeepPartial, Repository } from 'typeorm';
-import { IProject } from 'src/domain/interfaces/project.interface';
-import { IProjectsRepository } from 'src/domain/repositories/projects-repository.interface';
+import { IProject } from '@project-manager-api//domain/interfaces/project.interface';
+import { IProjectsRepository } from '@project-manager-api//domain/repositories/projects-repository.interface';
 import { ProjectEntity } from '../entities/project.entity';
 
 @Injectable()

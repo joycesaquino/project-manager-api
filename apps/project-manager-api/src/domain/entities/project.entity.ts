@@ -1,6 +1,4 @@
-import { IProject } from 'src/domain/interfaces/project.interface';
-import { ITask } from 'src/domain/interfaces/task.interface';
-import { IUser } from 'src/domain/interfaces/user.interface';
+
 import {
   Column,
   Entity,
@@ -11,6 +9,9 @@ import {
 } from 'typeorm';
 import { TaskEntity } from './task.entity';
 import { UserEntity } from './user.entity';
+import { IProject } from '@project-manager-api/domain/interfaces/project.interface';
+import { ITask } from '@project-manager-api/domain/interfaces/task.interface';
+import { IUser } from '@project-manager-api/domain/interfaces/user.interface';
 
 @Entity('project')
 export class ProjectEntity implements IProject {

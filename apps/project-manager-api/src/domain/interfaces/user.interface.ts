@@ -1,4 +1,3 @@
-// src/domain/interfaces/user.interface.ts
 import { IProject } from './project.interface';
 import { ITask } from './task.interface';
 

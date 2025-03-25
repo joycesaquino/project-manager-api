@@ -1,7 +1,7 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { AuthService } from '../../../../infrastructure/auth/auth.service';
 import { LoginDto } from './dtos/login.dto';
-import { Public } from 'src/gateways/guards/auth-guard/auth-guard.service';
+import { Public } from '@project-manager-api//gateways/guards/auth-guard/auth-guard.service';
 
 @Controller('auth')
 export class AuthController {
