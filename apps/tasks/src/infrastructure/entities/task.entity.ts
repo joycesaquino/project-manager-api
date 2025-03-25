@@ -1,6 +1,6 @@
-import { IProject } from '@project-manager-api//domain/interfaces/project.interface';
-import { ITask } from '@project-manager-api//domain/interfaces/task.interface';
-import { IUser } from '@project-manager-api//domain/interfaces/user.interface';
+import { IProject } from '@project-manager-api/domain/interfaces/project.interface';
+import { ITask } from '../../domain/interfaces/task.interface';
+import { IUser } from '@project-manager-api/domain/interfaces/user.interface';
 import {
   Column,
   Entity,
@@ -8,8 +8,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { ProjectEntity } from './project.entity';
-import { UserEntity } from './user.entity';
+import { ProjectEntity } from '@project-manager-api/domain/entities/project.entity';
+import { UserEntity } from '@project-manager-api/domain/entities/user.entity';
 
 @Entity('tasks')
 export class TaskEntity implements ITask {
@@ -32,3 +32,4 @@ export class TaskEntity implements ITask {
   @JoinColumn()
   user: IUser;
 }
+

@@ -1,4 +1,4 @@
-import { ITask } from './task.interface';
+import { ITask } from '../../../../tasks/src/domain/interfaces/task.interface';
 import { IUser } from './user.interface';
 
 /**

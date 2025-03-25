@@ -7,11 +7,11 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { TaskEntity } from './task.entity';
 import { UserEntity } from './user.entity';
 import { IProject } from '@project-manager-api/domain/interfaces/project.interface';
-import { ITask } from '@project-manager-api/domain/interfaces/task.interface';
+import { ITask } from 'apps/tasks/src/domain/interfaces/task.interface';
 import { IUser } from '@project-manager-api/domain/interfaces/user.interface';
+import { TaskEntity } from 'apps/tasks/src/infrastructure/entities/task.entity';
 
 @Entity('project')
 export class ProjectEntity implements IProject {

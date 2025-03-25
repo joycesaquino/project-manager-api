@@ -1,29 +1,24 @@
 import { Module } from '@nestjs/common';
 
+import { TaskEntity } from 'apps/tasks/src/infrastructure/entities/task.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProjectsRepositoryService } from '../../domain/repositories/projects.repository.service';
-import { TasksRepositoryService } from '../../domain/repositories/tasks.repository.service';
-import { UsersRepositoryService } from '../../domain/repositories/users.repository.service';
+import { UserEntity } from '@project-manager-api/domain/entities/user.entity';
+import { ProjectEntity } from '@project-manager-api/domain/entities/project.entity';
+import { ProjectsRepositoryService } from '@project-manager-api/domain/repositories/projects.repository.service';
+import { UsersRepositoryService } from '@project-manager-api/domain/repositories/users.repository.service';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([UserEntity, ProjectEntity, TaskEntity]),
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'db/sql.sqlite',
-      entities: ['dist/**/*.entity{.ts,.js}'],
+      entities: [__dirname + 'dist/**/*.entity{.ts,.js}'],
       synchronize: true,
       autoLoadEntities: true,
     }),
   ],
-  providers: [
-    ProjectsRepositoryService,
-    TasksRepositoryService,
-    UsersRepositoryService,
-  ],
-  exports: [
-    ProjectsRepositoryService,
-    TasksRepositoryService,
-    UsersRepositoryService,
-  ],
+  providers: [ProjectsRepositoryService, UsersRepositoryService],
+  exports: [ProjectsRepositoryService, UsersRepositoryService],
 })
 export class DatabaseModule {}

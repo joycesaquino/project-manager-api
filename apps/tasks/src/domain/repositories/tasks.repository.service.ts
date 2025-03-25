@@ -1,5 +1,5 @@
 import { DataSource, DeepPartial, Repository } from 'typeorm';
-import { TaskEntity } from '../entities/task.entity';
+import { TaskEntity } from '../../infrastructure/entities/task.entity';
 import { ITasksRepository } from './tasks-repository.interface';
 import { ITask } from '../interfaces/task.interface';
 import { Injectable } from '@nestjs/common';
