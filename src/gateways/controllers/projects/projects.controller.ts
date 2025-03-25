@@ -1,7 +1,7 @@
 import {
   Body,
   Controller,
-  Get,
+  Get, Inject,
   NotFoundException,
   Param,
   Post, Req,
@@ -11,21 +11,33 @@ import { CreateProjectService } from 'src/domain/use-cases/projects/create-proje
 import { GetAllProjectsService } from 'src/domain/use-cases/projects/get-all-projects.service';
 import { GetProjectByIdService } from 'src/domain/use-cases/projects/get-project-by-id.service';
 import { CreateProjectDto } from './dtos/create-project.dto';
+import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
 
-const userId = 1;
 @Controller('projects')
 export class ProjectsController {
   constructor(
     private readonly getAllProjectsUseCase: GetAllProjectsService,
     private readonly getProjectByIdUseCase: GetProjectByIdService,
     private readonly createProjectUseCase: CreateProjectService,
+    @Inject(CACHE_MANAGER) private cacheService: Cache
   ) {}
 
   @Get()
   async findAll(@Req() request) {
     try {
       const loggedUser = request.user;
-      return await this.getAllProjectsUseCase.execute(loggedUser.sub);
+
+      const cachedData = await this.cacheService.get<{ name: string }>(
+        `users/${loggedUser.sub}/all-projects`,
+      )
+      console.log(cachedData);
+      if (cachedData) {
+        console.log("Getting data from cache!");
+        return cachedData;
+      }
+
+      const data = await this.getAllProjectsUseCase.execute(loggedUser.sub);
+      await this.cacheService.set(`user-${loggedUser.sub}/all-projects`, data);
     } catch (error) {
       throw new NotFoundException(error.message);
     }
