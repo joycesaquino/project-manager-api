@@ -6,9 +6,9 @@ import {
 import { MessagePattern, Payload } from '@nestjs/microservices';
 
 import { CreateTaskDto } from './dtos/create-task.dto';
-import { GetAllTasksService } from '../../domain/use-cases/tasks/get-all-tasks.service';
-import { GetTaskByIdService } from '../../domain/use-cases/tasks/get-task-by-id.service';
-import { CreateTaskService } from '../../domain/use-cases/tasks/create-task.service';
+import { GetTaskByIdService } from '../../domain/use-cases/get-task-by-id.service';
+import { CreateTaskService } from '../../domain/use-cases/create-task.service';
+import { GetAllTasksService } from '../../domain/use-cases/get-all-tasks.service';
 
 @Controller()
 export class TasksController {
