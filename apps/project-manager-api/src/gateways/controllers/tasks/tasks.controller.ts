@@ -24,7 +24,7 @@ export class TasksController {
   findAll(@Req() request) {
     try {
       const loggedUser = request.user;
-      console.log('Enviando requisição para Tasks', { cmd: 'get_tasks' });
+      console.log('Enviando requisição para Tasks - Joyce Aquino', { cmd: 'get_tasks' });
 
       return this.redisClient.send(
         { cmd: 'get_tasks' },
@@ -37,7 +37,7 @@ export class TasksController {
 
   @Get(':id')
   findById(@Req() request, @Param('id') taskId: number) {
-    console.log('Enviando requisição para Tasks', { cmd: 'get_task_by_id' });
+    console.log('Enviando requisição para Tasks - Joyce Aquino', { cmd: 'get_task_by_id' });
     try {
       const loggedUser = request.user;
       return this.redisClient.send(
@@ -51,7 +51,7 @@ export class TasksController {
 
   @Post()
   create(@Req() request, @Body() createTaskDto: CreateTaskDto) {
-    console.log('Enviando requisição para Tasks', { cmd: 'create_task' });
+    console.log('Enviando requisição para Tasks - Joyce Aquino', { cmd: 'create_task' });
     try {
       const loggedUser = request.user;
       return this.redisClient.send(
