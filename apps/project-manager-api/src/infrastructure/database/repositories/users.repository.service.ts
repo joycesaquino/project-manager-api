@@ -21,7 +21,7 @@ export class UsersRepositoryService
     return this.findOneByOrFail({ id });
   }
 
-  add(paylod: DeepPartial<IUser>): Promise<IUser> {
-    return this.save(paylod);
+  add(payload: DeepPartial<IUser>): Promise<IUser> {
+    return this.save(payload);
   }
 }

@@ -21,8 +21,8 @@ export class TasksRepositoryService
     return this.findOneByOrFail({ id, user: { id: userId } });
   }
 
-  add(paylod: DeepPartial<ITask>): Promise<ITask> {
-    return this.save(paylod);
+  add(payload: DeepPartial<ITask>): Promise<ITask> {
+    return this.save(payload);
   }
 
   updateById(payload: DeepPartial<ITask>) {

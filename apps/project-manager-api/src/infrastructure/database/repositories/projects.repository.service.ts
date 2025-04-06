@@ -21,7 +21,7 @@ export class ProjectsRepositoryService
     return this.findOneByOrFail({ id, user: { id: userId } });
   }
 
-  add(paylod: DeepPartial<IProject>): Promise<IProject> {
-    return this.save(paylod);
+  add(payload: DeepPartial<IProject>): Promise<IProject> {
+    return this.save(payload);
   }
 }
