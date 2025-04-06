@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DomainModule } from './domain/domain.module';
 import { InfrastructureModule } from './infrastructure/infrastructure.module';
-import { AppController } from './app.controller';
 import { GatewaysModule } from './gateways/gateways.module';
-import { AuthGuardService } from './gateways/guards/auth-guard/auth-guard.service';
 import { APP_GUARD } from '@nestjs/core';
+import { AuthGuardService } from './gateways/guards/auth-guard.service';
 
 @Module({
   imports: [DomainModule, InfrastructureModule, GatewaysModule],

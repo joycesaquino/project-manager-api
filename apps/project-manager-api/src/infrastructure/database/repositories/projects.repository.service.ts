@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, DeepPartial, Repository } from 'typeorm';
-import { IProject } from '@project-manager-api//domain/interfaces/project.interface';
-import { IProjectsRepository } from '@project-manager-api//domain/repositories/projects-repository.interface';
 import { ProjectEntity } from '../entities/project.entity';
+import { IProjectsRepository } from '@project-manager-api/domain/repositories/projects-repository.interface';
+import { IProject } from '@project-manager-api/domain/interfaces/project.interface';
 
 @Injectable()
 export class ProjectsRepositoryService
@@ -13,15 +13,15 @@ export class ProjectsRepositoryService
     super(ProjectEntity, dataSource.createEntityManager());
   }
 
-  async findAll(userId: number): Promise<IProject[]> {
+  findAll(userId: number): Promise<IProject[]> {
     return this.findBy({ user: { id: userId } });
   }
 
-  async findById(id: number): Promise<IProject> {
-    return this.findOneByOrFail({ id });
+  findById(id: number, userId: number): Promise<IProject> {
+    return this.findOneByOrFail({ id, user: { id: userId } });
   }
 
-  async add(payload: DeepPartial<IProject>): Promise<IProject> {
-    return this.save(payload);
+  add(paylod: DeepPartial<IProject>): Promise<IProject> {
+    return this.save(paylod);
   }
 }

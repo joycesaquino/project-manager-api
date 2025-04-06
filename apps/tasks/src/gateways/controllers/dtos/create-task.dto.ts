@@ -1,17 +1,14 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateTaskDto {
-  @IsNotEmpty({ message: 'O nome da tarefa precisa ser definido' })
+  @IsNotEmpty({ message: 'O nome da tarefa precisa de ser definido' })
   @IsString()
   name: string;
 
-  @IsNotEmpty({ message: 'O status da tarefa precisa ser definido' })
+  @IsNotEmpty({ message: 'O status da tarefa precisa de ser definido' })
   @IsString()
   status: 'pending' | 'completed';
 
+  @IsNumber()
   projectId: number;
-
-  userId: number;
-
-
 }

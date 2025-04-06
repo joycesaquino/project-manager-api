@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { UsersModule } from '../../domain/use-cases/users/users.module';
+import { AuthService } from './auth.service';
+import { UsersModule } from '@project-manager-api/domain/use-cases/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
-import { AuthService } from './auth.service';
 
 @Module({
   imports: [

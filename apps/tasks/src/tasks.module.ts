@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { InfrastructureModule } from './infrastructure/infraestructure.module';
-import { GatewaysModule } from './gateways/gateways.module';
+import { TasksService } from './tasks.service';
 import { DomainModule } from './domain/domain.module';
+import { InfrastructureModule } from './infrastructure/infrastructure.module';
+import { GatewaysModule } from './gateways/gateways.module';
 
 @Module({
-  imports: [DomainModule, InfrastructureModule, GatewaysModule],
+  imports: [InfrastructureModule, GatewaysModule, DomainModule],
+  providers: [TasksService],
 })
 export class TasksModule {}

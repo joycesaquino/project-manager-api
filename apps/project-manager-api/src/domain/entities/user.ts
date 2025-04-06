@@ -1,0 +1,13 @@
+import { ITask } from '@tasks/domain/interfaces/task.interface';
+import { IProject } from '../interfaces/project.interface';
+import { IUser } from '../interfaces/user.interface';
+
+export class User implements IUser {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  projects: IProject[];
+  tasks: ITask[];
+}

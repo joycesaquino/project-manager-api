@@ -9,19 +9,23 @@ import {
   Req,
   UnprocessableEntityException,
 } from '@nestjs/common';
+import { CreateTaskDto } from './dtos/create-task.dto';
 import { ClientProxy } from '@nestjs/microservices';
-import { CreateTaskDto } from '@project-manager-api/gateways/controllers/tasks/dtos/create-task.dto';
+import { ApiBearerAuth } from '@nestjs/swagger';
+
+@ApiBearerAuth()
 @Controller('tasks')
 export class TasksController {
   constructor(
-    @Inject('PROJECTS_MANAGER_API') private readonly redisClient:
-    ClientProxy,
+    @Inject('PROJECTS_MANAGER_API') private readonly redisClient: ClientProxy,
   ) {}
+
   @Get()
-  async findAll(@Req() request) {
+  findAll(@Req() request) {
     try {
       const loggedUser = request.user;
-      console.log('Disparando mensagem para Tasks');
+      console.log('Enviando requisição para Tasks', { cmd: 'get_tasks' });
+
       return this.redisClient.send(
         { cmd: 'get_tasks' },
         { userId: loggedUser.sub },
@@ -30,23 +34,24 @@ export class TasksController {
       throw new NotFoundException(error.message);
     }
   }
+
   @Get(':id')
-  async findOne(@Req() request, @Param('id') id: number) {
+  findById(@Req() request, @Param('id') taskId: number) {
+    console.log('Enviando requisição para Tasks', { cmd: 'get_task_by_id' });
     try {
       const loggedUser = request.user;
       return this.redisClient.send(
         { cmd: 'get_task_by_id' },
-        {
-          userId: loggedUser.sub,
-          taskId: id,
-        },
+        { userId: loggedUser.sub, taskId },
       );
     } catch (error) {
       throw new NotFoundException(error.message);
     }
   }
+
   @Post()
-  async create(@Req() request, @Body() createTaskDto: CreateTaskDto) {
+  create(@Req() request, @Body() createTaskDto: CreateTaskDto) {
+    console.log('Enviando requisição para Tasks', { cmd: 'create_task' });
     try {
       const loggedUser = request.user;
       return this.redisClient.send(

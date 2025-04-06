@@ -10,15 +10,6 @@
   "monorepo": true,
   "root": "apps/project-manager-api",
   "projects": {
-    "common": {
-      "type": "library",
-      "root": "libs/common",
-      "entryFile": "index",
-      "sourceRoot": "libs/common/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/common/tsconfig.lib.json"
-      }
-    },
     "project-manager-api": {
       "type": "application",
       "root": "apps/project-manager-api",
@@ -35,6 +26,15 @@
       "sourceRoot": "apps/tasks/src",
       "compilerOptions": {
         "tsConfigPath": "apps/tasks/tsconfig.app.json"
+      }
+    },
+    "common": {
+      "type": "library",
+      "root": "libs/common",
+      "entryFile": "index",
+      "sourceRoot": "libs/common/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/common/tsconfig.lib.json"
       }
     }
   }

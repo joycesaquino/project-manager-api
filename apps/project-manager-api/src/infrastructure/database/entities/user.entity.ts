@@ -1,9 +1,9 @@
-import { IUser } from '@project-manager-api//domain/interfaces/user.interface';
+import { IProject } from '@project-manager-api/domain/interfaces/project.interface';
+import { IUser } from '@project-manager-api/domain/interfaces/user.interface';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ProjectEntity } from './project.entity';
-import { TaskEntity } from '../../../../tasks/src/infrastructure/entities/task.entity';
-import { IProject } from '@project-manager-api//domain/interfaces/project.interface';
-import { ITask } from 'apps/tasks/src/domain/interfaces/task.interface';
+import { TaskEntity } from '@tasks/infrastructure/entities/task.entity';
+import { ITask } from '@tasks/domain/interfaces/task.interface';
 
 @Entity('user')
 export class UserEntity implements IUser {
@@ -13,7 +13,7 @@ export class UserEntity implements IUser {
   @Column({ name: 'firstName', nullable: false })
   firstName: string;
 
-  @Column({ name: 'lastName' })
+  @Column({ name: 'lastName', nullable: false })
   lastName: string;
 
   @Column({ name: 'email', nullable: false })
@@ -25,6 +25,6 @@ export class UserEntity implements IUser {
   @OneToMany(() => ProjectEntity, (project) => project.user)
   projects: IProject[];
 
-  @OneToMany(() => TaskEntity, (task: TaskEntity) => task.user)
+  @OneToMany(() => TaskEntity, (task) => task.user)
   tasks: ITask[];
 }

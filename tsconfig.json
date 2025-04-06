@@ -18,6 +18,9 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
+      "@tasks/*": [
+        "apps/tasks/src/*"
+      ],
       "@app/common": [
         "libs/common/src"
       ],

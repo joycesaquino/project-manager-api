@@ -4,6 +4,7 @@ import { Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create(TasksModule);
+
   app.connectMicroservice(
     {
       transport: Transport.REDIS,

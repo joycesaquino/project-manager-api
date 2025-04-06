@@ -1,17 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { UsersRepositoryService } from '../../repositories/users.repository.service';
-import { IUser } from '../../interfaces/user.interface';
+import { UsersRepositoryService } from '@project-manager-api/infrastructure/database/repositories/users.repository.service';
+import { BaseUseCase } from '../../../../../../libs/common/src/interfaces/base-use-case';
+import { IUser } from '@project-manager-api/domain/interfaces/user.interface';
 
 @Injectable()
-export class GetUserByEmailService {
-  constructor(private readonly usersRepository: UsersRepositoryService) {
-  }
+export class GetUserByEmailService implements BaseUseCase {
+  constructor(private readonly usersRepository: UsersRepositoryService) {}
 
-  async execute(email: string): Promise<IUser> {
-    const user = await this.usersRepository.findByEmail(email);
-    if (!user) {
-      throw new Error('Usuário não encontrado');
-    }
-    return user;
+  execute(email: string): Promise<IUser> {
+    return this.usersRepository.findByEmail(email);
   }
 }

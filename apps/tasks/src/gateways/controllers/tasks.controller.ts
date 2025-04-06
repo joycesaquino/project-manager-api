@@ -3,46 +3,48 @@ import {
   NotFoundException,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
-
 import { CreateTaskDto } from './dtos/create-task.dto';
-import { GetTaskByIdService } from '../../domain/use-cases/get-task-by-id.service';
-import { CreateTaskService } from '../../domain/use-cases/create-task.service';
-import { GetAllTasksService } from '../../domain/use-cases/get-all-tasks.service';
+import { MessagePattern, Payload } from '@nestjs/microservices';
+import { CreateTaskService } from '@tasks/domain/use-cases/create-task.service';
+import { GetAllTasksService } from '@tasks/domain/use-cases/get-all-tasks.service';
+import { GetTaskByIdService } from '@tasks/domain/use-cases/get-task-by-id.service';
 
-@Controller()
+@Controller('tasks')
 export class TasksController {
   constructor(
     private readonly getAllTasksUseCase: GetAllTasksService,
     private readonly getTaskByIdUseCase: GetTaskByIdService,
     private readonly createTaskUseCase: CreateTaskService,
   ) {}
+
   @MessagePattern({ cmd: 'get_tasks' })
-  async findAll(@Payload() data: { userId: number }) {
+  findAll(@Payload() data: { userId: number }) {
+    console.log('Processando requisição em Tasks');
+
     try {
-      console.log('recebendo mensagens em task');
-      return await this.getAllTasksUseCase.execute({ userId: data.userId });
+      return this.getAllTasksUseCase.execute(data.userId);
     } catch (error) {
       throw new NotFoundException(error.message);
     }
   }
+
   @MessagePattern({ cmd: 'get_task_by_id' })
-  async findOne(@Payload() data: { userId: number; taskId: number }) {
+  findById(@Payload() data: { userId: number; taskId: number }) {
+    console.log('Processando GET em Tasks - get_task_by_id');
     try {
-      return await this.getTaskByIdUseCase.execute({
-        userId: data.userId,
-        taskId: data.taskId,
-      });
+      return this.getTaskByIdUseCase.execute(data.taskId, data.userId);
     } catch (error) {
       throw new NotFoundException(error.message);
     }
   }
+
   @MessagePattern({ cmd: 'create_task' })
-  async create(@Payload() data: { task: CreateTaskDto; userId: number }) {
+  create(@Payload() data: { task: CreateTaskDto; userId: number }) {
+    console.log('Processando POST em Tasks - create_task');
     try {
-      return await this.createTaskUseCase.execute({
-        userId: data.userId,
+      return this.createTaskUseCase.execute({
         task: data.task,
+        userId: data.userId,
       });
     } catch (error) {
       throw new UnprocessableEntityException(error.message);

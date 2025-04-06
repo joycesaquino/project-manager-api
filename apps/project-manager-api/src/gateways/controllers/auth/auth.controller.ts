@@ -1,13 +1,12 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
-import { AuthService } from '../../../../infrastructure/auth/auth.service';
+import { Body, Controller, Post } from '@nestjs/common';
+import { AuthService } from '@project-manager-api/infrastructure/auth/auth.service';
 import { LoginDto } from './dtos/login.dto';
-import { Public } from '@project-manager-api//gateways/guards/auth-guard/auth-guard.service';
+import { Public } from '@project-manager-api/gateways/guards/auth-guard.service';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @HttpCode(HttpStatus.OK)
   @Post('login')
   @Public()
   login(@Body() loginDto: LoginDto) {

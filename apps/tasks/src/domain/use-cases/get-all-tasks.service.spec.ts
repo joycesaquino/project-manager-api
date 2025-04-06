@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { GetAllTasksService } from './get-all-tasks.service';
 
-describe('GetAllTasksByProjectIdService', () => {
+describe('GetAllTasksService', () => {
   let service: GetAllTasksService;
 
   beforeEach(async () => {

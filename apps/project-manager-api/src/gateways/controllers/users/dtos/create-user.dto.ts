@@ -1,18 +1,19 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateUserDto {
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Primeiro nome não pode ser vazio' })
   @IsString()
   firstName: string;
 
+  @IsNotEmpty({ message: 'Segundo nome não pode ser vazio' })
   @IsString()
-  lastName?: string;
+  lastName: string;
 
+  @IsNotEmpty({ message: 'Email não pode ser vazio' })
   @IsString()
-  @IsNotEmpty()
   email: string;
 
+  @IsNotEmpty({ message: 'Senha não pode ser vazia' })
   @IsString()
-  @IsNotEmpty()
   password: string;
 }

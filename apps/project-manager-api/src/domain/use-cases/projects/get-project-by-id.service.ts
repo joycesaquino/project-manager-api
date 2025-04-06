@@ -1,26 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { UsersRepositoryService } from '../../repositories/users.repository.service';
-import { ProjectsRepositoryService } from '../../repositories/projects.repository.service';
-import { IProject } from '../../interfaces/project.interface';
+import { IProject } from '@project-manager-api/domain/interfaces/project.interface';
+import { ProjectsRepositoryService } from '@project-manager-api/infrastructure/database/repositories/projects.repository.service';
+import { UsersRepositoryService } from '@project-manager-api/infrastructure/database/repositories/users.repository.service';
+import { BaseUseCase } from '../../../../../../libs/common/src/interfaces/base-use-case';
 
 @Injectable()
-export class GetProjectByIdService {
+export class GetProjectByIdService implements BaseUseCase {
   constructor(
-    private readonly usersRepository: UsersRepositoryService,
     private readonly projectsRepository: ProjectsRepositoryService,
+    private readonly usersRepository: UsersRepositoryService,
   ) {}
+
   async execute(payload: {
-    userId: number;
     projectId: number;
+    userId: number;
   }): Promise<IProject> {
-    const userData = await this.usersRepository.findById(payload.userId);
-    if (!userData) {
-      throw new Error('Usuário não encontrado');
-    }
-    const project = await this.projectsRepository.findById(payload.projectId);
-    if (!project) {
-      throw new Error('Erro ao recuperar projetos');
-    }
+    await this.usersRepository.findById(payload.userId);
+
+    const project = await this.projectsRepository.findById(
+      payload.projectId,
+      payload.userId,
+    );
+
     return project;
   }
 }

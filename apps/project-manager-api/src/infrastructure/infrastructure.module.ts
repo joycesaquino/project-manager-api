@@ -4,6 +4,6 @@ import { AuthModule } from './auth/auth.module';
 import { RedisModule } from './redis/redis.module';
 
 @Module({
-  imports: [DatabaseModule, AuthModule, RedisModule]
+  imports: [DatabaseModule, AuthModule, RedisModule],
 })
 export class InfrastructureModule {}
