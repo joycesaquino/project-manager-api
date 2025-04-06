@@ -25,7 +25,7 @@ export class TasksRepositoryService
     return this.save(paylod);
   }
 
-  updateById(paylod: DeepPartial<ITask>) {
-    // return this.update(paylod.id, paylod);
+  updateById(payload: DeepPartial<ITask>) {
+    return this.update(payload.id, payload);
   }
 }

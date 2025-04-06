@@ -5,5 +5,5 @@ export interface ITasksRepository {
   findAll(userId: number): Promise<ITask[]>;
   findById(id: number, userId: number): Promise<ITask>;
   add(paylod: DeepPartial<ITask>): Promise<ITask>;
-  updateById(paylod: DeepPartial<ITask>);
+  updateById(payload: DeepPartial<ITask>);
 }
